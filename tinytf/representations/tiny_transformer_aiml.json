@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "model_name": "TinyTransformer",
+    "architecture": "transformer",
+    "vocab_size": 10,
+    "embedding_dim": 5,
+    "context_length": 5,
+    "num_blocks": 1,
+    "num_heads": 1,
+    "feedforward_dim": 5,
+    "total_parameters": 200
+  },
+  "topic": "tinytransformer",
+  "categories": [
+    {
+      "pattern": "WHAT IS THE MODEL NAME",
+      "template": "The model name is TinyTransformer."
+    },
+    {
+      "pattern": "WHAT IS THE ARCHITECTURE",
+      "template": "This is a transformer architecture model."
+    },
+    {
+      "pattern": "WHAT KIND OF MODEL IS THIS",
+      "template": "This is a tiny transformer model with 200 parameters."
+    },
+    {
+      "pattern": "WHAT IS THE EMBEDDING DIMENSION",
+      "template": "The embedding dimension is 5."
+    },
+    {
+      "pattern": "HOW MANY LAYERS",
+      "template": "The model has 1 transformer block(s)."
+    },
+    {
+      "pattern": "HOW MANY ATTENTION HEADS",
+      "template": "The model has 1 attention head(s)."
+    },
+    {
+      "pattern": "WHAT IS THE VOCABULARY SIZE",
+      "template": "The vocabulary size is 10 tokens."
+    },
+    {
+      "pattern": "WHAT IS THE CONTEXT LENGTH",
+      "template": "The maximum context length is 5 tokens."
+    },
+    {
+      "pattern": "WHAT LAYERS DOES THE MODEL HAVE",
+      "template": "The model has an embedding layer, self-attention layer, feed-forward network, and output layer."
+    },
+    {
+      "pattern": "DESCRIBE THE EMBEDDING LAYER",
+      "template": "The embedding layer maps input tokens to dense vectors. It has a 10x5 weight matrix mapping 10 tokens to 5-dimensional embeddings."
+    },
+    {
+      "pattern": "DESCRIBE THE ATTENTION LAYER",
+      "template": "The self-attention layer has query, key, and value projections with a single attention head. It computes weighted combinations of token representations."
+    },
+    {
+      "pattern": "DESCRIBE THE FEEDFORWARD LAYER",
+      "template": "The feed-forward network consists of two linear transformations with dimension 5. It processes each position independently."
+    },
+    {
+      "pattern": "DESCRIBE THE OUTPUT LAYER",
+      "template": "The output layer projects the 5-dimensional representations back to vocabulary size (10) to produce token predictions."
+    },
+    {
+      "pattern": "HOW DOES ATTENTION WORK",
+      "template": "Attention computes query, key, and value matrices, then calculates attention scores by comparing queries and keys. These scores weight the values to produce the output."
+    },
+    {
+      "pattern": "WHAT IS SELF ATTENTION",
+      "template": "Self-attention allows each position in the sequence to attend to all positions, capturing dependencies between tokens."
+    },
+    {
+      "pattern": "HOW DO YOU RUN INFERENCE",
+      "template": "Inference flows through: token embedding, self-attention, feed-forward network, and output projection. The result is token probabilities."
+    },
+    {
+      "pattern": "WHAT IS A TRANSFORMER",
+      "template": "A transformer is a neural network architecture based on self-attention mechanisms. It processes sequences in parallel rather than sequentially."
+    },
+    {
+      "pattern": "WHAT ARE THE MODEL PARAMETERS",
+      "template": "The model has approximately 200 parameters split across: embedding (50), attention (75), feed-forward (50), and output (50) layers."
+    },
+    {
+      "pattern": "WHAT FORMATS ARE SUPPORTED",
+      "template": "The model is available in GGUF, PyTorch, ONNX, JSON, TOML, AIML, OpenCog AtomSpace, and hypergraph formats."
+    },
+    {
+      "pattern": "HOW CAN I USE THIS MODEL",
+      "template": "You can load it with the gguf-workbench Python API, use it for educational purposes, or study its structure in various representation formats."
+    },
+    {
+      "pattern": "HELLO",
+      "template": "Hello! I am the TinyTransformer model. Ask me about my architecture, layers, or how I work."
+    },
+    {
+      "pattern": "HELP",
+      "template": "You can ask me about: my architecture, layers, attention mechanism, parameters, or supported formats. Try 'what is the architecture' or 'describe the attention layer'."
+    },
+    {
+      "pattern": "THANK YOU",
+      "template": "You're welcome! Let me know if you have more questions about the model."
+    }
+  ],
+  "category_count": 23
+}
