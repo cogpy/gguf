@@ -1,0 +1,11 @@
+{
+    "Model_Architecture": "TinyTransformer",
+    "Context_Length": 5,
+    "Embedding_Length": 5,
+    "Block_Count": 1,
+    "Feed_Forward_Layer_Size": 5,
+    "RoPE_Dimension_Count": 5,
+    "Attention_Head_Count": 1,
+    "Layer_Norm_Epsilon": 9.999999747378752e-06,
+    "RoPE_Frequency_Base": 1.401298464324817e-41
+}

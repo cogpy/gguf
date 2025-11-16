@@ -1,0 +1,25 @@
+[nodes.embedding]
+type = "embedding"
+input_dim = 10
+output_dim = 5
+weights = []
+
+[nodes.attention]
+type = "self_attention"
+input_dim = 5
+num_heads = 1
+weights = []
+
+[nodes.output]
+type = "linear"
+input_dim = 5
+output_dim = 10
+weights = []
+
+[edges.embedding_to_attention]
+from = "embedding"
+to = "attention"
+
+[edges.attention_to_output]
+from = "attention"
+to = "output"
