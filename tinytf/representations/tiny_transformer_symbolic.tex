@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\begin{document}
+
+\section{TinyTransformer Symbolic Representation}
+
+\subsection{Notation}
+\begin{itemize}
+  \item $x$: Input token IDs, x ∈ {0,1,...,9}^L where L=5
+  \item $E$: Embedding matrix (vocab_size × d_model)
+  \item $h$: Hidden state / embeddings
+  \item $Q, K, V$: Query, Key, Value matrices
+  \item $W^Q, W^K, W^V$: Query, Key, Value projection weights
+  \item $W^O$: Attention output projection
+  \item $A$: Attention weights (after softmax)
+  \item $W^{ff}_1, W^{ff}_2$: Feed-forward network weights
+  \item $W^{out}$: Output projection to vocabulary
+  \item $LN$: Layer normalization
+  \item $d_k$: Dimension of keys (= d_model / num_heads = 5)
+  \item $L$: Sequence length (= 5)
+  \item $d_{model}$: Model dimension (= 5)
+  \item $d_{ff}$: Feed-forward dimension (= 5)
+  \item $V$: Vocabulary size (= 10)
+\end{itemize}
+
+\subsection{Parameters}
+\begin{align}
+  E &\in \mathbb{R}^{10 \times 5} \quad \text{Token embedding matrix} \\
+  W^Q &\in \mathbb{R}^{5 \times 5} \quad \text{Query projection weights} \\
+  W^K &\in \mathbb{R}^{5 \times 5} \quad \text{Key projection weights} \\
+  W^V &\in \mathbb{R}^{5 \times 5} \quad \text{Value projection weights} \\
+  W^O &\in \mathbb{R}^{5 \times 5} \quad \text{Attention output projection} \\
+  \gamma_1 &\in \mathbb{R}^{5} \quad \text{Layer norm 1 scale} \\
+  \beta_1 &\in \mathbb{R}^{5} \quad \text{Layer norm 1 bias} \\
+  W^{ff}_1 &\in \mathbb{R}^{5 \times 5} \quad \text{FFN first layer weights} \\
+  W^{ff}_2 &\in \mathbb{R}^{5 \times 5} \quad \text{FFN second layer weights} \\
+  W^{out} &\in \mathbb{R}^{5 \times 10} \quad \text{Output projection to vocabulary} \\
+\end{align}
+
+\subsection{Forward Pass}
+\begin{align}
+  h_0 &= E[x] \\
+  Q &= h_0 W^Q \\
+  K &= h_0 W^K \\
+  V &= h_0 W^V \\
+  S &= QK^T / sqrt(d_k) \\
+  A &= softmax(S) \\
+  h_attn &= (AV)W^O \\
+  h_1 &= LN(h_0 + h_attn; gamma_1, beta_1) \\
+  h_ff &= GELU(h_1 W^{ff}_1) W^{ff}_2 \\
+  h_2 &= h_1 + h_ff \\
+  logits &= h_2 W^{out} \\
+  y &= argmax(logits) \\
+\end{align}
+
+\end{document}
