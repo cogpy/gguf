@@ -10,6 +10,7 @@ A comprehensive tool for inspecting, modifying, and customizing GGUF (GPT-Genera
 - 🔑 **List** all metadata keys in a file
 - 🛠️ **CLI** Easy-to-use command-line interface
 - 📚 **Python API** for programmatic access
+- 🧠 **Pure Python Inference** - Multiple implementations showing how transformers work (NEW!)
 
 ## Installation
 
@@ -159,6 +160,33 @@ GGUF (GPT-Generated Unified Format) is a binary format for storing large languag
 - `tokenizer.ggml.tokens` - Tokenizer vocabulary
 - And many more architecture-specific keys
 
+## Pure Python Inference (NEW!)
+
+This repository now includes **pure Python implementations** of transformer inference, showing exactly how weights are applied step-by-step. Perfect for learning and understanding transformers!
+
+```python
+from gguf_workbench.inference import TinyTransformerListBased
+
+# Load model
+model = TinyTransformerListBased.from_json('tinytf/tiny_model_gguf.json')
+
+# Forward pass with detailed trace showing every operation
+model.forward([0, 1, 2], trace=True)
+```
+
+**Four different implementations:**
+1. **List-Based** - Most transparent, shows every indexed weight application
+2. **Dict-Based** - Best for inspection, returns structured results
+3. **Class-Based** - Production-ready with type safety
+4. **Functional** - Pure functions for testing and verification
+
+See [Inference README](gguf_workbench/inference/README.md) and [Language Comparison](LANGUAGE_COMPARISON.md) for details.
+
+**Run the demo:**
+```bash
+python examples/demonstrate_inference.py
+```
+
 ## Use Cases
 
 - **Model Customization**: Change model names, descriptions, or other metadata
@@ -166,6 +194,7 @@ GGUF (GPT-Generated Unified Format) is a binary format for storing large languag
 - **Metadata Export**: Extract metadata for documentation or analysis
 - **Model Preparation**: Prepare models for specific deployment scenarios
 - **Debugging**: Investigate model format issues
+- **Learning**: Understand how transformers work with transparent inference code (NEW!)
 
 ## Development
 
