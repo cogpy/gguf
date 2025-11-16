@@ -1,0 +1,767 @@
+{
+  "metadata": {
+    "model_name": "TinyTransformer",
+    "architecture": "transformer",
+    "representation": "DAG",
+    "vocab_size": 10,
+    "embedding_dim": 5,
+    "context_length": 5,
+    "num_blocks": 1,
+    "num_heads": 1,
+    "feedforward_dim": 5
+  },
+  "nodes": {
+    "input_tokens": {
+      "id": "input_tokens",
+      "type": "tensor",
+      "properties": {
+        "description": "Input token IDs"
+      },
+      "shape": [
+        null,
+        5
+      ],
+      "dtype": "int64"
+    },
+    "embedding_weights": {
+      "id": "embedding_weights",
+      "type": "parameter",
+      "properties": {
+        "parameter_count": 50
+      },
+      "shape": [
+        10,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "embed_op": {
+      "id": "embed_op",
+      "type": "operation",
+      "properties": {
+        "operation": "embedding_lookup"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "embeddings": {
+      "id": "embeddings",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_query_weights": {
+      "id": "attn_query_weights",
+      "type": "parameter",
+      "properties": {
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_query_op": {
+      "id": "attn_query_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_query": {
+      "id": "attn_query",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_key_weights": {
+      "id": "attn_key_weights",
+      "type": "parameter",
+      "properties": {
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_key_op": {
+      "id": "attn_key_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_key": {
+      "id": "attn_key",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_value_weights": {
+      "id": "attn_value_weights",
+      "type": "parameter",
+      "properties": {
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_value_op": {
+      "id": "attn_value_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_value": {
+      "id": "attn_value",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_scores_op": {
+      "id": "attn_scores_op",
+      "type": "operation",
+      "properties": {
+        "operation": "matmul_scaled",
+        "scale": 0.447
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_scores": {
+      "id": "attn_scores",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "softmax_op": {
+      "id": "softmax_op",
+      "type": "operation",
+      "properties": {
+        "operation": "softmax",
+        "axis": -1
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_weights": {
+      "id": "attn_weights",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "apply_attn_op": {
+      "id": "apply_attn_op",
+      "type": "operation",
+      "properties": {
+        "operation": "matmul"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_output_pre": {
+      "id": "attn_output_pre",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_output_weights": {
+      "id": "attn_output_weights",
+      "type": "parameter",
+      "properties": {
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_proj_op": {
+      "id": "attn_proj_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_output": {
+      "id": "attn_output",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "residual1_op": {
+      "id": "residual1_op",
+      "type": "operation",
+      "properties": {
+        "operation": "add"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "attn_residual": {
+      "id": "attn_residual",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ln1_weight": {
+      "id": "ln1_weight",
+      "type": "parameter",
+      "properties": {},
+      "shape": [
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ln1_bias": {
+      "id": "ln1_bias",
+      "type": "parameter",
+      "properties": {},
+      "shape": [
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ln1_op": {
+      "id": "ln1_op",
+      "type": "operation",
+      "properties": {
+        "operation": "layer_norm"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "ln1_output": {
+      "id": "ln1_output",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_w1": {
+      "id": "ffn_w1",
+      "type": "parameter",
+      "properties": {},
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn1_op": {
+      "id": "ffn1_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear_gelu"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "ffn_hidden": {
+      "id": "ffn_hidden",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_w2": {
+      "id": "ffn_w2",
+      "type": "parameter",
+      "properties": {},
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn2_op": {
+      "id": "ffn2_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "ffn_output": {
+      "id": "ffn_output",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "residual2_op": {
+      "id": "residual2_op",
+      "type": "operation",
+      "properties": {
+        "operation": "add"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "ffn_residual": {
+      "id": "ffn_residual",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "output_weights": {
+      "id": "output_weights",
+      "type": "parameter",
+      "properties": {},
+      "shape": [
+        5,
+        10
+      ],
+      "dtype": "float32"
+    },
+    "output_op": {
+      "id": "output_op",
+      "type": "operation",
+      "properties": {
+        "operation": "linear"
+      },
+      "shape": null,
+      "dtype": null
+    },
+    "logits": {
+      "id": "logits",
+      "type": "tensor",
+      "properties": {},
+      "shape": [
+        null,
+        5,
+        10
+      ],
+      "dtype": "float32"
+    }
+  },
+  "edges": {
+    "e1": {
+      "id": "e1",
+      "source": "input_tokens",
+      "target": "embed_op",
+      "label": null,
+      "properties": {}
+    },
+    "e2": {
+      "id": "e2",
+      "source": "embedding_weights",
+      "target": "embed_op",
+      "label": null,
+      "properties": {}
+    },
+    "e3": {
+      "id": "e3",
+      "source": "embed_op",
+      "target": "embeddings",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_query_1": {
+      "id": "e_attn_query_1",
+      "source": "embeddings",
+      "target": "attn_query_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_query_2": {
+      "id": "e_attn_query_2",
+      "source": "attn_query_weights",
+      "target": "attn_query_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_query_3": {
+      "id": "e_attn_query_3",
+      "source": "attn_query_op",
+      "target": "attn_query",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_key_1": {
+      "id": "e_attn_key_1",
+      "source": "embeddings",
+      "target": "attn_key_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_key_2": {
+      "id": "e_attn_key_2",
+      "source": "attn_key_weights",
+      "target": "attn_key_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_key_3": {
+      "id": "e_attn_key_3",
+      "source": "attn_key_op",
+      "target": "attn_key",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_value_1": {
+      "id": "e_attn_value_1",
+      "source": "embeddings",
+      "target": "attn_value_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_value_2": {
+      "id": "e_attn_value_2",
+      "source": "attn_value_weights",
+      "target": "attn_value_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_value_3": {
+      "id": "e_attn_value_3",
+      "source": "attn_value_op",
+      "target": "attn_value",
+      "label": null,
+      "properties": {}
+    },
+    "e_scores_1": {
+      "id": "e_scores_1",
+      "source": "attn_query",
+      "target": "attn_scores_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_scores_2": {
+      "id": "e_scores_2",
+      "source": "attn_key",
+      "target": "attn_scores_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_scores_3": {
+      "id": "e_scores_3",
+      "source": "attn_scores_op",
+      "target": "attn_scores",
+      "label": null,
+      "properties": {}
+    },
+    "e_softmax_1": {
+      "id": "e_softmax_1",
+      "source": "attn_scores",
+      "target": "softmax_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_softmax_2": {
+      "id": "e_softmax_2",
+      "source": "softmax_op",
+      "target": "attn_weights",
+      "label": null,
+      "properties": {}
+    },
+    "e_apply_1": {
+      "id": "e_apply_1",
+      "source": "attn_weights",
+      "target": "apply_attn_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_apply_2": {
+      "id": "e_apply_2",
+      "source": "attn_value",
+      "target": "apply_attn_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_apply_3": {
+      "id": "e_apply_3",
+      "source": "apply_attn_op",
+      "target": "attn_output_pre",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_proj_1": {
+      "id": "e_attn_proj_1",
+      "source": "attn_output_pre",
+      "target": "attn_proj_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_proj_2": {
+      "id": "e_attn_proj_2",
+      "source": "attn_output_weights",
+      "target": "attn_proj_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_attn_proj_3": {
+      "id": "e_attn_proj_3",
+      "source": "attn_proj_op",
+      "target": "attn_output",
+      "label": null,
+      "properties": {}
+    },
+    "e_res1_1": {
+      "id": "e_res1_1",
+      "source": "embeddings",
+      "target": "residual1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_res1_2": {
+      "id": "e_res1_2",
+      "source": "attn_output",
+      "target": "residual1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_res1_3": {
+      "id": "e_res1_3",
+      "source": "residual1_op",
+      "target": "attn_residual",
+      "label": null,
+      "properties": {}
+    },
+    "e_ln1_1": {
+      "id": "e_ln1_1",
+      "source": "attn_residual",
+      "target": "ln1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ln1_2": {
+      "id": "e_ln1_2",
+      "source": "ln1_weight",
+      "target": "ln1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ln1_3": {
+      "id": "e_ln1_3",
+      "source": "ln1_bias",
+      "target": "ln1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ln1_4": {
+      "id": "e_ln1_4",
+      "source": "ln1_op",
+      "target": "ln1_output",
+      "label": null,
+      "properties": {}
+    },
+    "e_ffn1_1": {
+      "id": "e_ffn1_1",
+      "source": "ln1_output",
+      "target": "ffn1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ffn1_2": {
+      "id": "e_ffn1_2",
+      "source": "ffn_w1",
+      "target": "ffn1_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ffn1_3": {
+      "id": "e_ffn1_3",
+      "source": "ffn1_op",
+      "target": "ffn_hidden",
+      "label": null,
+      "properties": {}
+    },
+    "e_ffn2_1": {
+      "id": "e_ffn2_1",
+      "source": "ffn_hidden",
+      "target": "ffn2_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ffn2_2": {
+      "id": "e_ffn2_2",
+      "source": "ffn_w2",
+      "target": "ffn2_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_ffn2_3": {
+      "id": "e_ffn2_3",
+      "source": "ffn2_op",
+      "target": "ffn_output",
+      "label": null,
+      "properties": {}
+    },
+    "e_res2_1": {
+      "id": "e_res2_1",
+      "source": "ln1_output",
+      "target": "residual2_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_res2_2": {
+      "id": "e_res2_2",
+      "source": "ffn_output",
+      "target": "residual2_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_res2_3": {
+      "id": "e_res2_3",
+      "source": "residual2_op",
+      "target": "ffn_residual",
+      "label": null,
+      "properties": {}
+    },
+    "e_out_1": {
+      "id": "e_out_1",
+      "source": "ffn_residual",
+      "target": "output_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_out_2": {
+      "id": "e_out_2",
+      "source": "output_weights",
+      "target": "output_op",
+      "label": null,
+      "properties": {}
+    },
+    "e_out_3": {
+      "id": "e_out_3",
+      "source": "output_op",
+      "target": "logits",
+      "label": null,
+      "properties": {}
+    }
+  },
+  "statistics": {
+    "node_count": 39,
+    "edge_count": 42,
+    "node_types": {
+      "tensor": 15,
+      "parameter": 10,
+      "operation": 14
+    },
+    "average_in_degree": 1.0769230769230769,
+    "average_out_degree": 1.0769230769230769,
+    "max_in_degree": 3,
+    "max_out_degree": 4
+  },
+  "topological_order": [
+    "input_tokens",
+    "embedding_weights",
+    "attn_query_weights",
+    "attn_key_weights",
+    "attn_value_weights",
+    "attn_output_weights",
+    "ln1_weight",
+    "ln1_bias",
+    "ffn_w1",
+    "ffn_w2",
+    "output_weights",
+    "embed_op",
+    "embeddings",
+    "attn_query_op",
+    "attn_key_op",
+    "attn_value_op",
+    "attn_query",
+    "attn_key",
+    "attn_value",
+    "attn_scores_op",
+    "attn_scores",
+    "softmax_op",
+    "attn_weights",
+    "apply_attn_op",
+    "attn_output_pre",
+    "attn_proj_op",
+    "attn_output",
+    "residual1_op",
+    "attn_residual",
+    "ln1_op",
+    "ln1_output",
+    "ffn1_op",
+    "ffn_hidden",
+    "ffn2_op",
+    "ffn_output",
+    "residual2_op",
+    "ffn_residual",
+    "output_op",
+    "logits"
+  ]
+}

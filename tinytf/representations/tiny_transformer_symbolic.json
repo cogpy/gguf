@@ -1,0 +1,284 @@
+{
+  "metadata": {
+    "model_name": "TinyTransformer",
+    "architecture": "transformer",
+    "representation": "symbolic",
+    "vocab_size": 10,
+    "embedding_dim": 5,
+    "context_length": 5,
+    "num_blocks": 1,
+    "num_heads": 1
+  },
+  "notation": {
+    "x": "Input token IDs, x \u2208 {0,1,...,9}^L where L=5",
+    "E": "Embedding matrix (vocab_size \u00d7 d_model)",
+    "h": "Hidden state / embeddings",
+    "Q, K, V": "Query, Key, Value matrices",
+    "W^Q, W^K, W^V": "Query, Key, Value projection weights",
+    "W^O": "Attention output projection",
+    "A": "Attention weights (after softmax)",
+    "W^{ff}_1, W^{ff}_2": "Feed-forward network weights",
+    "W^{out}": "Output projection to vocabulary",
+    "LN": "Layer normalization",
+    "d_k": "Dimension of keys (= d_model / num_heads = 5)",
+    "L": "Sequence length (= 5)",
+    "d_{model}": "Model dimension (= 5)",
+    "d_{ff}": "Feed-forward dimension (= 5)",
+    "V": "Vocabulary size (= 10)"
+  },
+  "parameters": {
+    "E": {
+      "name": "E",
+      "shape": [
+        10,
+        5
+      ],
+      "dtype": "float32",
+      "description": "Token embedding matrix"
+    },
+    "W^Q": {
+      "name": "W^Q",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32",
+      "description": "Query projection weights"
+    },
+    "W^K": {
+      "name": "W^K",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32",
+      "description": "Key projection weights"
+    },
+    "W^V": {
+      "name": "W^V",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32",
+      "description": "Value projection weights"
+    },
+    "W^O": {
+      "name": "W^O",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32",
+      "description": "Attention output projection"
+    },
+    "\\gamma_1": {
+      "name": "\\gamma_1",
+      "shape": [
+        5
+      ],
+      "dtype": "float32",
+      "description": "Layer norm 1 scale"
+    },
+    "\\beta_1": {
+      "name": "\\beta_1",
+      "shape": [
+        5
+      ],
+      "dtype": "float32",
+      "description": "Layer norm 1 bias"
+    },
+    "W^{ff}_1": {
+      "name": "W^{ff}_1",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32",
+      "description": "FFN first layer weights"
+    },
+    "W^{ff}_2": {
+      "name": "W^{ff}_2",
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32",
+      "description": "FFN second layer weights"
+    },
+    "W^{out}": {
+      "name": "W^{out}",
+      "shape": [
+        5,
+        10
+      ],
+      "dtype": "float32",
+      "description": "Output projection to vocabulary"
+    }
+  },
+  "expressions": {
+    "h_0": {
+      "name": "h_0",
+      "expression": "E[x]",
+      "dependencies": [
+        "E",
+        "x"
+      ],
+      "properties": {
+        "description": "Embedding lookup",
+        "shape": "(batch, L, d_model)",
+        "latex": "h_0 = E[x] \\in \\mathbb{R}^{L \\times d_{model}}"
+      }
+    },
+    "Q": {
+      "name": "Q",
+      "expression": "h_0 W^Q",
+      "dependencies": [
+        "h_0",
+        "W^Q"
+      ],
+      "properties": {
+        "description": "Query projection",
+        "shape": "(batch, L, d_k)",
+        "latex": "Q = h_0 W^Q"
+      }
+    },
+    "K": {
+      "name": "K",
+      "expression": "h_0 W^K",
+      "dependencies": [
+        "h_0",
+        "W^K"
+      ],
+      "properties": {
+        "description": "Key projection",
+        "shape": "(batch, L, d_k)",
+        "latex": "K = h_0 W^K"
+      }
+    },
+    "V": {
+      "name": "V",
+      "expression": "h_0 W^V",
+      "dependencies": [
+        "h_0",
+        "W^V"
+      ],
+      "properties": {
+        "description": "Value projection",
+        "shape": "(batch, L, d_k)",
+        "latex": "V = h_0 W^V"
+      }
+    },
+    "S": {
+      "name": "S",
+      "expression": "QK^T / sqrt(d_k)",
+      "dependencies": [
+        "Q",
+        "K"
+      ],
+      "properties": {
+        "description": "Scaled attention scores",
+        "shape": "(batch, L, L)",
+        "latex": "S = \\frac{QK^T}{\\sqrt{d_k}}"
+      }
+    },
+    "A": {
+      "name": "A",
+      "expression": "softmax(S)",
+      "dependencies": [
+        "S"
+      ],
+      "properties": {
+        "description": "Attention weights",
+        "shape": "(batch, L, L)",
+        "latex": "A = \\text{softmax}(S)"
+      }
+    },
+    "h_attn": {
+      "name": "h_attn",
+      "expression": "(AV)W^O",
+      "dependencies": [
+        "A",
+        "V",
+        "W^O"
+      ],
+      "properties": {
+        "description": "Attention output",
+        "shape": "(batch, L, d_model)",
+        "latex": "h_{\\text{attn}} = (AV)W^O"
+      }
+    },
+    "h_1": {
+      "name": "h_1",
+      "expression": "LN(h_0 + h_attn; gamma_1, beta_1)",
+      "dependencies": [
+        "h_0",
+        "h_attn",
+        "\\gamma_1",
+        "\\beta_1"
+      ],
+      "properties": {
+        "description": "Post-attention with residual and layer norm",
+        "shape": "(batch, L, d_model)",
+        "latex": "h_1 = \\text{LN}(h_0 + h_{\\text{attn}}; \\gamma_1, \\beta_1)"
+      }
+    },
+    "h_ff": {
+      "name": "h_ff",
+      "expression": "GELU(h_1 W^{ff}_1) W^{ff}_2",
+      "dependencies": [
+        "h_1",
+        "W^{ff}_1",
+        "W^{ff}_2"
+      ],
+      "properties": {
+        "description": "Feed-forward network",
+        "shape": "(batch, L, d_model)",
+        "latex": "h_{\\text{ff}} = \\text{GELU}(h_1 W^{ff}_1) W^{ff}_2"
+      }
+    },
+    "h_2": {
+      "name": "h_2",
+      "expression": "h_1 + h_ff",
+      "dependencies": [
+        "h_1",
+        "h_ff"
+      ],
+      "properties": {
+        "description": "Post-FFN with residual",
+        "shape": "(batch, L, d_model)",
+        "latex": "h_2 = h_1 + h_{\\text{ff}}"
+      }
+    },
+    "logits": {
+      "name": "logits",
+      "expression": "h_2 W^{out}",
+      "dependencies": [
+        "h_2",
+        "W^{out}"
+      ],
+      "properties": {
+        "description": "Output logits over vocabulary",
+        "shape": "(batch, L, vocab_size)",
+        "latex": "\\text{logits} = h_2 W^{\\text{out}}"
+      }
+    },
+    "y": {
+      "name": "y",
+      "expression": "argmax(logits)",
+      "dependencies": [
+        "logits"
+      ],
+      "properties": {
+        "description": "Predicted tokens",
+        "shape": "(batch, L)",
+        "latex": "y = \\arg\\max(\\text{logits})"
+      }
+    }
+  },
+  "statistics": {
+    "parameter_count": 10,
+    "expression_count": 12,
+    "total_parameters": 260
+  }
+}

@@ -2,6 +2,8 @@
 
 This directory contains a minimal transformer model in various formats, used for testing and demonstrating the GGUF Workbench functionality. The tiny transformer is intentionally small to make it easy to inspect, validate, and test file format conversions.
 
+**NEW**: See [`REPRESENTATION_ANALYSIS.md`](REPRESENTATION_ANALYSIS.md) for comprehensive analysis of hypergraph, DAG, and symbolic representations of the model.
+
 ## Overview
 
 The tiny transformer is a minimal working transformer model with:
@@ -310,6 +312,26 @@ Feed-Forward Network (5 → 5)
 Output Layer (5 → 10)
     ↓
 Output (logits over 10 tokens)
+```
+
+### Computational Graph Representations
+
+In addition to the file formats above, the model can be represented as computational graphs. See [`REPRESENTATION_ANALYSIS.md`](REPRESENTATION_ANALYSIS.md) for detailed analysis.
+
+The `representations/` directory contains:
+- **Hypergraph representation**: Multi-way edges connecting multiple tensors (most expressive)
+- **DAG representation**: Standard directed graph with operation nodes
+- **Symbolic/Algebraic representation**: Mathematical equations
+- **Comparison analysis**: Evaluation of all representation methods
+
+Generate these representations:
+```bash
+python examples/generate_representations.py
+```
+
+View the comparison:
+```bash
+cat tinytf/representations/representation_comparison.md
 ```
 
 ### Layer Details

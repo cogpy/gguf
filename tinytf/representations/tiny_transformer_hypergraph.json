@@ -1,0 +1,578 @@
+{
+  "metadata": {
+    "model_name": "TinyTransformer",
+    "architecture": "transformer",
+    "vocab_size": 10,
+    "embedding_dim": 5,
+    "context_length": 5,
+    "num_blocks": 1,
+    "num_heads": 1,
+    "feedforward_dim": 5,
+    "total_parameters": 200
+  },
+  "vertices": {
+    "input_tokens": {
+      "id": "input_tokens",
+      "type": "tensor",
+      "properties": {
+        "description": "Input token IDs",
+        "range": [
+          0,
+          9
+        ]
+      },
+      "shape": [
+        null,
+        5
+      ],
+      "dtype": "int64"
+    },
+    "embedding_weights": {
+      "id": "embedding_weights",
+      "type": "parameter",
+      "properties": {
+        "description": "Token embedding matrix",
+        "parameter_count": 50
+      },
+      "shape": [
+        10,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "embeddings": {
+      "id": "embeddings",
+      "type": "tensor",
+      "properties": {
+        "description": "Token embeddings"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "position_ids": {
+      "id": "position_ids",
+      "type": "tensor",
+      "properties": {
+        "description": "Position indices",
+        "range": [
+          0,
+          4
+        ]
+      },
+      "shape": [
+        null,
+        5
+      ],
+      "dtype": "int64"
+    },
+    "attn_query_weights": {
+      "id": "attn_query_weights",
+      "type": "parameter",
+      "properties": {
+        "description": "Attention query projection matrix",
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_query": {
+      "id": "attn_query",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention query vectors"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_key_weights": {
+      "id": "attn_key_weights",
+      "type": "parameter",
+      "properties": {
+        "description": "Attention key projection matrix",
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_key": {
+      "id": "attn_key",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention key vectors"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_value_weights": {
+      "id": "attn_value_weights",
+      "type": "parameter",
+      "properties": {
+        "description": "Attention value projection matrix",
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_value": {
+      "id": "attn_value",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention value vectors"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_scores": {
+      "id": "attn_scores",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention scores before softmax"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_weights": {
+      "id": "attn_weights",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention weights after softmax"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_output_pre": {
+      "id": "attn_output_pre",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention output before projection"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_output_weights": {
+      "id": "attn_output_weights",
+      "type": "parameter",
+      "properties": {
+        "description": "Attention output projection matrix",
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_output": {
+      "id": "attn_output",
+      "type": "tensor",
+      "properties": {
+        "description": "Attention block output"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "attn_residual": {
+      "id": "attn_residual",
+      "type": "tensor",
+      "properties": {
+        "description": "After attention residual connection"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ln1_weight": {
+      "id": "ln1_weight",
+      "type": "parameter",
+      "properties": {
+        "description": "Layer norm 1 weight",
+        "parameter_count": 5
+      },
+      "shape": [
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ln1_bias": {
+      "id": "ln1_bias",
+      "type": "parameter",
+      "properties": {
+        "description": "Layer norm 1 bias",
+        "parameter_count": 5
+      },
+      "shape": [
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ln1_output": {
+      "id": "ln1_output",
+      "type": "tensor",
+      "properties": {
+        "description": "After layer norm 1"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_w1": {
+      "id": "ffn_w1",
+      "type": "parameter",
+      "properties": {
+        "description": "FFN first layer weight",
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_hidden": {
+      "id": "ffn_hidden",
+      "type": "tensor",
+      "properties": {
+        "description": "FFN hidden activation"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_w2": {
+      "id": "ffn_w2",
+      "type": "parameter",
+      "properties": {
+        "description": "FFN second layer weight",
+        "parameter_count": 25
+      },
+      "shape": [
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_output": {
+      "id": "ffn_output",
+      "type": "tensor",
+      "properties": {
+        "description": "FFN output"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "ffn_residual": {
+      "id": "ffn_residual",
+      "type": "tensor",
+      "properties": {
+        "description": "After FFN residual connection"
+      },
+      "shape": [
+        null,
+        5,
+        5
+      ],
+      "dtype": "float32"
+    },
+    "output_weights": {
+      "id": "output_weights",
+      "type": "parameter",
+      "properties": {
+        "description": "Output projection to vocabulary",
+        "parameter_count": 50
+      },
+      "shape": [
+        5,
+        10
+      ],
+      "dtype": "float32"
+    },
+    "logits": {
+      "id": "logits",
+      "type": "tensor",
+      "properties": {
+        "description": "Output logits over vocabulary"
+      },
+      "shape": [
+        null,
+        5,
+        10
+      ],
+      "dtype": "float32"
+    }
+  },
+  "hyperedges": {
+    "embed_tokens": {
+      "id": "embed_tokens",
+      "sources": [
+        "input_tokens",
+        "embedding_weights"
+      ],
+      "targets": [
+        "embeddings"
+      ],
+      "operation": "embedding_lookup",
+      "properties": {
+        "description": "Convert token IDs to embeddings"
+      }
+    },
+    "project_query": {
+      "id": "project_query",
+      "sources": [
+        "embeddings",
+        "attn_query_weights"
+      ],
+      "targets": [
+        "attn_query"
+      ],
+      "operation": "linear",
+      "properties": {
+        "description": "Project to query space"
+      }
+    },
+    "project_key": {
+      "id": "project_key",
+      "sources": [
+        "embeddings",
+        "attn_key_weights"
+      ],
+      "targets": [
+        "attn_key"
+      ],
+      "operation": "linear",
+      "properties": {
+        "description": "Project to key space"
+      }
+    },
+    "project_value": {
+      "id": "project_value",
+      "sources": [
+        "embeddings",
+        "attn_value_weights"
+      ],
+      "targets": [
+        "attn_value"
+      ],
+      "operation": "linear",
+      "properties": {
+        "description": "Project to value space"
+      }
+    },
+    "compute_attention_scores": {
+      "id": "compute_attention_scores",
+      "sources": [
+        "attn_query",
+        "attn_key"
+      ],
+      "targets": [
+        "attn_scores"
+      ],
+      "operation": "matmul_scaled",
+      "properties": {
+        "description": "Compute scaled dot-product attention scores",
+        "scale_factor": 0.4472135954999579
+      }
+    },
+    "apply_softmax": {
+      "id": "apply_softmax",
+      "sources": [
+        "attn_scores"
+      ],
+      "targets": [
+        "attn_weights"
+      ],
+      "operation": "softmax",
+      "properties": {
+        "description": "Normalize attention scores",
+        "axis": -1
+      }
+    },
+    "apply_attention": {
+      "id": "apply_attention",
+      "sources": [
+        "attn_weights",
+        "attn_value"
+      ],
+      "targets": [
+        "attn_output_pre"
+      ],
+      "operation": "matmul",
+      "properties": {
+        "description": "Apply attention to values"
+      }
+    },
+    "project_output": {
+      "id": "project_output",
+      "sources": [
+        "attn_output_pre",
+        "attn_output_weights"
+      ],
+      "targets": [
+        "attn_output"
+      ],
+      "operation": "linear",
+      "properties": {
+        "description": "Project attention output"
+      }
+    },
+    "attention_residual": {
+      "id": "attention_residual",
+      "sources": [
+        "embeddings",
+        "attn_output"
+      ],
+      "targets": [
+        "attn_residual"
+      ],
+      "operation": "add",
+      "properties": {
+        "description": "Residual connection for attention"
+      }
+    },
+    "layer_norm_1": {
+      "id": "layer_norm_1",
+      "sources": [
+        "attn_residual",
+        "ln1_weight",
+        "ln1_bias"
+      ],
+      "targets": [
+        "ln1_output"
+      ],
+      "operation": "layer_norm",
+      "properties": {
+        "description": "Layer normalization after attention",
+        "epsilon": 1e-05
+      }
+    },
+    "ffn_layer1": {
+      "id": "ffn_layer1",
+      "sources": [
+        "ln1_output",
+        "ffn_w1"
+      ],
+      "targets": [
+        "ffn_hidden"
+      ],
+      "operation": "linear_gelu",
+      "properties": {
+        "description": "FFN first layer with GELU activation"
+      }
+    },
+    "ffn_layer2": {
+      "id": "ffn_layer2",
+      "sources": [
+        "ffn_hidden",
+        "ffn_w2"
+      ],
+      "targets": [
+        "ffn_output"
+      ],
+      "operation": "linear",
+      "properties": {
+        "description": "FFN second layer"
+      }
+    },
+    "ffn_residual_add": {
+      "id": "ffn_residual_add",
+      "sources": [
+        "ln1_output",
+        "ffn_output"
+      ],
+      "targets": [
+        "ffn_residual"
+      ],
+      "operation": "add",
+      "properties": {
+        "description": "Residual connection for FFN"
+      }
+    },
+    "output_projection": {
+      "id": "output_projection",
+      "sources": [
+        "ffn_residual",
+        "output_weights"
+      ],
+      "targets": [
+        "logits"
+      ],
+      "operation": "linear",
+      "properties": {
+        "description": "Project to vocabulary size"
+      }
+    }
+  },
+  "statistics": {
+    "vertex_count": 26,
+    "hyperedge_count": 14,
+    "vertex_types": {
+      "tensor": 16,
+      "parameter": 10
+    },
+    "operation_types": {
+      "embedding_lookup": 1,
+      "linear": 6,
+      "matmul_scaled": 1,
+      "softmax": 1,
+      "matmul": 1,
+      "add": 2,
+      "layer_norm": 1,
+      "linear_gelu": 1
+    },
+    "average_hyperedge_size": 3.0,
+    "max_hyperedge_size": 4
+  }
+}
