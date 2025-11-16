@@ -6,7 +6,7 @@ import argparse
 import json
 import sys
 
-from . import GGUFReader, GGUFWriter, __version__
+from . import GGUFReader, GGUFWriter, GGUFConverter, __version__
 
 
 def cmd_inspect(args) -> int:
@@ -146,6 +146,40 @@ def cmd_list(args) -> int:
         return 1
 
 
+def cmd_convert(args) -> int:
+    """Convert GGUF file to various representation formats."""
+    try:
+        converter = GGUFConverter(args.file)
+        
+        # Determine which formats to export
+        formats = None
+        if args.format:
+            formats = [args.format]
+        
+        # Export all or specified formats
+        results = converter.export_all(
+            output_dir=args.output,
+            include_weights=args.weights,
+            formats=formats
+        )
+        
+        print(f"Converted {args.file} to {args.output}/")
+        print(f"\nGenerated formats:")
+        for fmt, path in results.items():
+            if isinstance(path, dict):
+                for subfmt, subpath in path.items():
+                    print(f"  {fmt} ({subfmt}): {subpath}")
+            else:
+                print(f"  {fmt}: {path}")
+        
+        return 0
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
 def main():
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(
@@ -200,6 +234,22 @@ def main():
     list_parser.add_argument("file", help="Path to the GGUF file")
     list_parser.add_argument("-v", "--verbose", action="store_true", help="Show key values")
     list_parser.set_defaults(func=cmd_list)
+    
+    # Convert command
+    convert_parser = subparsers.add_parser("convert", help="Convert GGUF to various representations")
+    convert_parser.add_argument("file", help="Path to the GGUF file")
+    convert_parser.add_argument("output", help="Output directory for generated files")
+    convert_parser.add_argument(
+        "-f", "--format",
+        choices=["hypergraph", "dag", "symbolic", "aiml", "atomspace", "toml"],
+        help="Specific format to generate (default: all formats)"
+    )
+    convert_parser.add_argument(
+        "-w", "--weights",
+        action="store_true",
+        help="Include weight values (creates large files for big models)"
+    )
+    convert_parser.set_defaults(func=cmd_convert)
 
     args = parser.parse_args()
 

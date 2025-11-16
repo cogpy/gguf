@@ -518,3 +518,48 @@ class TOMLHypergraphRepresentation:
         """Save to JSON file."""
         with open(path, "w", encoding="utf-8") as f:
             json.dump(self.to_json(), f, indent=2)
+    
+    @classmethod
+    def from_hypergraph(cls, hypergraph, include_weights: bool = False):
+        """
+        Create TOML hypergraph from a hypergraph representation.
+        
+        Args:
+            hypergraph: HypergraphRepresentation instance
+            include_weights: Whether to include weight values
+        
+        Returns:
+            TOMLHypergraphRepresentation instance
+        """
+        toml_hg = cls()
+        toml_hg.metadata = hypergraph.metadata.copy()
+        
+        # Add vertices
+        for v_id, vertex in hypergraph.vertices.items():
+            shape_list = list(vertex.shape) if vertex.shape else []
+            toml_hg.add_vertex(
+                v_id,
+                vertex.type,
+                shape_list,
+                vertex.dtype,
+                vertex.properties
+            )
+        
+        # Add hyperedges
+        for he_id, hyperedge in hypergraph.hyperedges.items():
+            toml_hg.add_hyperedge(
+                he_id,
+                hyperedge.operation,
+                hyperedge.sources,
+                hyperedge.targets,
+                hyperedge.properties
+            )
+        
+        # Add weights if requested
+        # Note: In a real implementation, we'd need to extract weights from the hypergraph
+        # or from the original GGUF file
+        if include_weights:
+            # Weights would be added here if available
+            pass
+        
+        return toml_hg

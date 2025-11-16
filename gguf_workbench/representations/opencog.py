@@ -402,3 +402,64 @@ class OpenCogAtomSpaceRepresentation:
         """Save AtomSpace to JSON file."""
         with open(path, "w", encoding="utf-8") as f:
             json.dump(self.to_json(), f, indent=2)
+    
+    @classmethod
+    def from_hypergraph(cls, hypergraph, model_info: dict):
+        """
+        Create OpenCog AtomSpace from a hypergraph representation.
+        
+        Args:
+            hypergraph: HypergraphRepresentation instance
+            model_info: Dictionary with model metadata
+        
+        Returns:
+            OpenCogAtomSpaceRepresentation instance
+        """
+        atomspace = cls()
+        
+        # Add model concept
+        model_name = model_info.get("name", "Model")
+        atomspace.add_concept_node(model_name, truth_value=(1.0, 1.0))
+        atomspace.add_concept_node("TransformerModel", truth_value=(1.0, 1.0))
+        atomspace.add_inheritance_link(model_name, "TransformerModel", truth_value=(1.0, 1.0))
+        
+        # Add architecture properties
+        for key, value in model_info.items():
+            if key != "name" and value is not None:
+                prop_name = f"has{key.replace('_', ' ').title().replace(' ', '')}"
+                value_concept = f"{key.title()}{value}"
+                
+                atomspace.add_predicate_node(prop_name)
+                atomspace.add_concept_node(value_concept, truth_value=(1.0, 1.0))
+                atomspace.add_evaluation_link(
+                    prop_name,
+                    [model_name, value_concept],
+                    truth_value=(1.0, 1.0)
+                )
+        
+        # Add vertices as concepts
+        for v_id, vertex in hypergraph.vertices.items():
+            atomspace.add_concept_node(v_id, truth_value=(1.0, 1.0))
+            
+            # Add type information
+            type_concept = f"{vertex.type.title()}Type"
+            atomspace.add_concept_node(type_concept)
+            atomspace.add_inheritance_link(v_id, type_concept, truth_value=(1.0, 1.0))
+        
+        # Add hyperedges as execution links
+        for he_id, hyperedge in hypergraph.hyperedges.items():
+            schema_name = hyperedge.operation.replace("_", " ").title().replace(" ", "")
+            atomspace.add_schema_node(schema_name)
+            
+            # Create execution link with sources and targets
+            inputs = [src for src in hyperedge.sources]
+            outputs = [tgt for tgt in hyperedge.targets]
+            
+            # Add execution link for each output
+            for output in outputs:
+                atomspace.add_execution_link(
+                    schema_name,
+                    inputs + [output]
+                )
+        
+        return atomspace
