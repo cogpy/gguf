@@ -180,6 +180,14 @@ model.forward([0, 1, 2], trace=True)
 3. **Class-Based** - Production-ready with type safety
 4. **Functional** - Pure functions for testing and verification
 
+**Multiple representation formats:**
+- **Hypergraph** - Multi-way edges for complex tensor operations
+- **DAG** - Directed acyclic graph of computations
+- **Symbolic** - Mathematical/algebraic equations
+- **AIML** - Pandorabot chatbot integration format
+- **OpenCog AtomSpace** - Typed hypergraph for symbolic AI (URE, PLN, ECAN, MOSES)
+- **TOML Hypergraph** - Configuration format with explicit hypergraph tuples
+
 See [Inference README](gguf_workbench/inference/README.md) and [Language Comparison](LANGUAGE_COMPARISON.md) for details.
 
 **Run the demo:**

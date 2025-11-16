@@ -252,7 +252,158 @@ import onnx
 model = onnx.load('tiny_transformer.onnx')
 ```
 
-### 7. PyTorch State Dict Directory
+### 7. AIML Format (Pandorabot)
+
+#### `representations/tiny_transformer.aiml`
+AIML (Artificial Intelligence Markup Language) representation for chatbot integration.
+
+**Contents:**
+```xml
+<aiml version="2.0">
+  <category>
+    <pattern>WHAT IS THE MODEL NAME</pattern>
+    <template>The model name is TinyTransformer.</template>
+  </category>
+  ...
+</aiml>
+```
+
+**Features:**
+- Pattern-response pairs encoding model knowledge
+- Compatible with Pandorabots and AIML interpreters
+- 23 categories covering architecture, layers, and operations
+- Educational chatbot interface to the model
+
+Use this for:
+- Creating interactive model documentation
+- Building conversational AI about the model
+- Pattern-based knowledge representation
+- Integration with chatbot platforms
+
+**Loading:**
+```python
+from gguf_workbench.representations import AIMLRepresentation
+aiml = AIMLRepresentation.from_tiny_transformer()
+aiml.save_xml('model.aiml')
+```
+
+### 8. OpenCog AtomSpace Format
+
+#### `representations/tiny_transformer_atomspace.scm`
+OpenCog AtomSpace representation as a typed hypergraph in Scheme format.
+
+**Contents:**
+```scheme
+(use-modules (opencog) (opencog ure) (opencog pln))
+
+(ConceptNode "TinyTransformer" (stv 1.0 1.0))
+(InheritanceLink (stv 1.0 1.0)
+  (ConceptNode "TinyTransformer")
+  (ConceptNode "TransformerModel"))
+...
+```
+
+**Features:**
+- Typed hypergraph knowledge representation
+- Compatible with URE (Unified Rule Engine)
+- Includes PLN (Probabilistic Logic Networks) truth values
+- ECAN (Economic Attention Networks) attention values
+- MOSES (Meta-Optimizing Semantic Evolutionary Search) integration
+- 50+ atoms representing model structure
+- 5 knowledge base rules for inference
+
+**Components:**
+- **ConceptNodes**: Model concepts (TinyTransformer, layers, etc.)
+- **PredicateNodes**: Properties (hasVocabularySize, etc.)
+- **InheritanceLinks**: Is-a relationships (TinyTransformer is-a TransformerModel)
+- **EvaluationLinks**: Property assertions with truth values
+- **ExecutionLinks**: Computational flow (Embed, Attend, etc.)
+- **ImplicationLinks**: PLN inference rules
+
+Use this for:
+- Symbolic AI reasoning about models
+- Cognitive architecture integration
+- Probabilistic inference
+- Evolutionary optimization
+- Neuro-symbolic AI systems
+
+**Loading:**
+```python
+from gguf_workbench.representations import OpenCogAtomSpaceRepresentation
+atomspace = OpenCogAtomSpaceRepresentation.from_tiny_transformer()
+atomspace.save_scheme('model.scm')
+```
+
+**Loading in OpenCog:**
+```scheme
+(load "tiny_transformer_atomspace.scm")
+```
+
+### 9. TOML Hypergraph Format
+
+#### `representations/tiny_transformer_hypergraph.toml`
+TOML configuration format with explicit hypergraph structure and tuples.
+
+**Contents:**
+```toml
+[metadata]
+model_name = "TinyTransformer"
+representation = "hypergraph"
+vocab_size = 10
+
+[vertices.input_tokens]
+type = "tensor"
+shape = ['batch', 5]
+
+[hyperedges.embed]
+operation = "embedding_lookup"
+sources = ["input_tokens", "embedding_weights"]
+targets = ["embeddings"]
+
+[weights.embedding_weights]
+values = [
+  [0.9347, 0.0783, ...],
+  ...
+]
+```
+
+**Features:**
+- Human-readable TOML configuration
+- Explicit hypergraph structure with vertices and hyperedges
+- Source/target tuples showing multi-way relationships
+- Full weight matrices included
+- 18 vertices (tensors and parameters)
+- 9 hyperedges (operations)
+- 225 parameters total
+
+**Sections:**
+- `[metadata]`: Model configuration
+- `[vertices.*]`: Tensors and parameters with shapes
+- `[hyperedges.*]`: Operations with source/target tuples
+- `[weights.*]`: Actual weight values
+
+Use this for:
+- Configuration-based model definition
+- Human-editable hypergraph specification
+- Version control friendly format
+- TOML-based tooling integration
+- Educational demonstrations
+
+**Loading:**
+```python
+from gguf_workbench.representations import TOMLHypergraphRepresentation
+toml_hg = TOMLHypergraphRepresentation.from_tiny_transformer()
+toml_hg.save_toml('model_hypergraph.toml')
+```
+
+**Parsing:**
+```python
+import tomli  # or tomllib in Python 3.11+
+with open('tiny_transformer_hypergraph.toml', 'rb') as f:
+    data = tomli.load(f)
+```
+
+### 10. PyTorch State Dict Directory
 
 #### `tiny_transformer/`
 Directory containing PyTorch's saved state dict in filesystem format.
@@ -439,10 +590,16 @@ The small size makes it perfect for:
 | `.json` (parsed) | ~300B | Yes | No | Metadata only |
 | `.toml` (with weights) | ~5KB | Yes | Yes | Manual editing |
 | `.toml` (test) | ~400B | Yes | No | Structure testing |
+| `.toml` (hypergraph) | ~15KB | Yes | Yes | Hypergraph with tuples |
 | `.bin` | 800B | No | Yes | Weight storage only |
 | `.pth` | ~6KB | No | Yes | PyTorch training/inference |
 | `.onnx` | ~15KB | No | Yes | Cross-platform deployment |
 | `tiny_transformer/` | ~2KB | No | Yes | PyTorch large model format |
+| `.aiml` | ~3KB | Yes | No | Pandorabot chatbot integration |
+| `.scm` (AtomSpace) | ~10KB | Partial | No | OpenCog symbolic AI |
+| Hypergraph JSON | ~20KB | Yes | No | Graph analysis tools |
+| DAG JSON | ~15KB | Yes | No | Computational graph |
+| Symbolic JSON | ~8KB | Yes | No | Mathematical equations |
 
 ## Vocabulary
 
