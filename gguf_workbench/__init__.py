@@ -9,3 +9,7 @@ from .writer import GGUFWriter
 from .metadata import GGUFMetadata
 
 __all__ = ["GGUFReader", "GGUFWriter", "GGUFMetadata", "__version__"]
+
+# Inference module is available but not imported by default
+# Use: from gguf_workbench import inference
+# Or:  from gguf_workbench.inference import TinyTransformerListBased
