@@ -288,6 +288,242 @@ public:
 - Signal processing
 - Quick experiments
 
+### Common Lisp
+
+**Score: 6.5/10**
+
+**Strengths:**
+- ✅ Powerful macro system
+- ✅ Interactive development (REPL)
+- ✅ Flexible and expressive
+- ✅ Good for symbolic computation
+- ✅ Multiple paradigms supported
+
+**Weaknesses:**
+- ❌ Limited ML ecosystem
+- ❌ Syntax can be challenging (many parentheses)
+- ❌ Smaller community
+- ❌ Performance varies by implementation
+
+**Best For:**
+- Symbolic AI and reasoning
+- Metaprogramming
+- Research prototypes
+- Educational purposes (AI history)
+
+**Example:**
+```lisp
+(defun embed-tokens (token-ids embedding-weights)
+  "Look up embeddings for token IDs"
+  (mapcar (lambda (id) (nth id embedding-weights))
+          token-ids))
+
+(defun dot-product (vec1 vec2)
+  "Compute dot product of two vectors"
+  (reduce #'+ (mapcar #'* vec1 vec2)))
+
+(defun matrix-vector-multiply (matrix vector)
+  "Multiply matrix by vector"
+  (mapcar (lambda (row) (dot-product row vector))
+          matrix))
+```
+
+### Scheme
+
+**Score: 6/10**
+
+**Strengths:**
+- ✅ Minimal, elegant syntax
+- ✅ Strong theoretical foundation
+- ✅ Excellent for teaching programming concepts
+- ✅ Tail call optimization
+- ✅ Continuation support
+
+**Weaknesses:**
+- ❌ Very limited ML libraries
+- ❌ Small standard library
+- ❌ Less practical for production ML
+- ❌ Multiple implementations with variations
+
+**Best For:**
+- Teaching programming fundamentals
+- Language research
+- Academic exercises
+- Compiler construction
+
+**Example:**
+```scheme
+(define (embed-tokens token-ids embedding-weights)
+  (map (lambda (id) (list-ref embedding-weights id))
+       token-ids))
+
+(define (dot-product vec1 vec2)
+  (apply + (map * vec1 vec2)))
+
+(define (matrix-vector-multiply matrix vector)
+  (map (lambda (row) (dot-product row vector))
+       matrix))
+
+(define (softmax values)
+  (let* ((max-val (apply max values))
+         (exp-vals (map (lambda (v) (exp (- v max-val))) values))
+         (sum-exp (apply + exp-vals)))
+    (map (lambda (v) (/ v sum-exp)) exp-vals)))
+```
+
+### Elixir
+
+**Score: 6.5/10**
+
+**Strengths:**
+- ✅ Excellent concurrency (Erlang VM)
+- ✅ Fault-tolerant
+- ✅ Functional programming
+- ✅ Pattern matching
+- ✅ Good for distributed systems
+
+**Weaknesses:**
+- ❌ Limited ML ecosystem
+- ❌ Not optimized for numerical computing
+- ❌ Immutable data can be memory-intensive
+- ❌ Less suitable for compute-intensive tasks
+
+**Best For:**
+- Distributed inference services
+- Real-time systems
+- Scalable API servers
+- Fault-tolerant model serving
+
+**Example:**
+```elixir
+defmodule TinyTransformer do
+  def embed_tokens(token_ids, embedding_weights) do
+    Enum.map(token_ids, fn id -> Enum.at(embedding_weights, id) end)
+  end
+  
+  def dot_product(vec1, vec2) do
+    Enum.zip(vec1, vec2)
+    |> Enum.map(fn {a, b} -> a * b end)
+    |> Enum.sum()
+  end
+  
+  def matrix_vector_multiply(matrix, vector) do
+    Enum.map(matrix, fn row -> dot_product(row, vector) end)
+  end
+  
+  def softmax(values) do
+    max_val = Enum.max(values)
+    exp_vals = Enum.map(values, fn v -> :math.exp(v - max_val) end)
+    sum_exp = Enum.sum(exp_vals)
+    Enum.map(exp_vals, fn v -> v / sum_exp end)
+  end
+end
+```
+
+### Assembly (x86-64)
+
+**Score: 4/10**
+
+**Strengths:**
+- ✅ Maximum possible performance
+- ✅ Complete hardware control
+- ✅ Optimal for specific operations
+- ✅ Used in performance-critical kernels
+
+**Weaknesses:**
+- ❌ Extremely verbose and complex
+- ❌ Platform-specific
+- ❌ Very difficult to maintain
+- ❌ Not suitable for full implementation
+- ❌ Requires deep hardware knowledge
+
+**Best For:**
+- Optimizing critical inner loops
+- SIMD operations (AVX, AVX-512)
+- Hardware-specific optimizations
+- Learning computer architecture
+
+**Example (simplified matrix-vector dot product):**
+```asm
+; Compute dot product of two vectors (simplified)
+; Assumes vectors in xmm0-xmm3 registers (4 floats each)
+dot_product:
+    mulps   xmm0, xmm4      ; Multiply first 4 elements
+    mulps   xmm1, xmm5      ; Multiply next 4 elements
+    addps   xmm0, xmm1      ; Sum partial products
+    haddps  xmm0, xmm0      ; Horizontal add
+    haddps  xmm0, xmm0      ; Horizontal add again
+    ret
+
+; Note: Real implementation would be much more complex
+; with proper memory management, loops, and error handling
+```
+
+**Reality Check:**
+Assembly is **not practical** for implementing a complete transformer. It's only used for optimizing specific operations within higher-level implementations (e.g., BLAS kernels called by NumPy/PyTorch).
+
+### Limbo (Inferno OS)
+
+**Score: 3/10**
+
+**Strengths:**
+- ✅ Simple syntax (similar to Go)
+- ✅ Built-in concurrency
+- ✅ Designed for distributed systems
+- ✅ Type-safe
+
+**Weaknesses:**
+- ❌ Extremely limited ecosystem
+- ❌ Virtually no ML libraries
+- ❌ Very small user base
+- ❌ Limited modern tooling
+- ❌ Primarily historical interest
+
+**Best For:**
+- Embedded distributed systems
+- Research into distributed computing
+- Historical OS research
+- Niche embedded applications
+
+**Example:**
+```limbo
+implement TinyTransformer;
+
+include "sys.m";
+include "draw.m";
+
+TinyTransformer: module {
+    embed_tokens: fn(token_ids: array of int, 
+                     embedding_weights: array of array of real)
+                     : array of array of real;
+    
+    dot_product: fn(vec1: array of real, vec2: array of real): real;
+};
+
+embed_tokens(token_ids: array of int, 
+             embedding_weights: array of array of real)
+             : array of array of real
+{
+    embeddings := array[len token_ids] of array of real;
+    for i := 0; i < len token_ids; i++ {
+        embeddings[i] = embedding_weights[token_ids[i]];
+    }
+    return embeddings;
+}
+
+dot_product(vec1: array of real, vec2: array of real): real
+{
+    sum := 0.0;
+    for i := 0; i < len vec1; i++ {
+        sum += vec1[i] * vec2[i];
+    }
+    return sum;
+}
+```
+
+**Reality Check:**
+Limbo is a **historical curiosity** and not recommended for any modern ML work. It's included here for completeness, but Python, Julia, or even JavaScript would be vastly superior choices.
+
 ## Recommendations by Use Case
 
 ### 1. Educational/Teaching Materials
@@ -368,11 +604,16 @@ Reasoning:
 | Language | LOC | Ratio vs Python |
 |----------|-----|-----------------|
 | Python | 100 | 1.0x |
-| TypeScript | 120 | 1.2x |
 | Julia | 90 | 0.9x |
+| TypeScript | 120 | 1.2x |
+| Scheme | 130 | 1.3x |
+| Common Lisp | 140 | 1.4x |
+| Elixir | 150 | 1.5x |
+| Go | 180 | 1.8x |
 | Rust | 200 | 2.0x |
 | C++ | 250 | 2.5x |
-| Go | 180 | 1.8x |
+| Limbo | 220 | 2.2x |
+| Assembly | 2000+ | 20x+ |
 
 ### Development Time (estimated)
 
@@ -381,8 +622,13 @@ Reasoning:
 | Python | 4h | 1.0x |
 | Julia | 5h | 1.25x |
 | TypeScript | 6h | 1.5x |
+| Common Lisp | 8h | 2.0x |
+| Scheme | 8h | 2.0x |
+| Elixir | 10h | 2.5x |
 | Rust | 12h | 3.0x |
 | C++ | 16h | 4.0x |
+| Limbo | 20h | 5.0x |
+| Assembly | 80h+ | 20x+ |
 
 ## Performance Comparison (estimated)
 
@@ -390,12 +636,19 @@ For 1000 forward passes on TinyTransformer:
 
 | Language | Time | Memory | Ratio |
 |----------|------|--------|-------|
+| Assembly (hand-optimized) | 8ms | 1MB | 0.8x |
 | C++ (optimized) | 10ms | 1MB | 1.0x |
 | Rust (optimized) | 12ms | 1MB | 1.2x |
 | Julia | 20ms | 2MB | 2.0x |
 | Python (NumPy) | 50ms | 5MB | 5.0x |
-| Python (lists) | 500ms | 10MB | 50x |
 | TypeScript | 100ms | 8MB | 10x |
+| Elixir | 150ms | 12MB | 15x |
+| Common Lisp (compiled) | 80ms | 6MB | 8.0x |
+| Scheme (compiled) | 100ms | 7MB | 10x |
+| Python (lists) | 500ms | 10MB | 50x |
+| Limbo | 200ms | 8MB | 20x |
+
+**Note:** Performance varies significantly based on implementation quality, compiler optimization, and specific use cases.
 
 ## Conclusion
 
@@ -428,6 +681,51 @@ For **transparent inference demonstration**:
    - Production-grade
    - Learning curve
 
+6. **MATLAB/Octave** - 7.5/10
+   - Excellent for matrices
+   - Academic standard
+   - Good visualization
+
+7. **C++** - 7.0/10
+   - Maximum performance
+   - Industry standard (llama.cpp)
+   - Complex but powerful
+
+8. **Common Lisp** - 6.5/10
+   - Powerful macros
+   - Flexible
+   - Historical significance
+
+9. **Elixir** - 6.5/10
+   - Excellent concurrency
+   - Distributed systems
+   - Not for compute-heavy tasks
+
+10. **Go** - 6.5/10
+    - Simple deployment
+    - Good for services
+    - Limited ML ecosystem
+
+11. **Haskell** - 6.0/10
+    - Pure functional
+    - Type safety
+    - Academic/theoretical
+
+12. **Scheme** - 6.0/10
+    - Minimal and elegant
+    - Teaching tool
+    - Limited practical use
+
+13. **Assembly** - 4.0/10
+    - Maximum performance (kernels only)
+    - Extremely complex
+    - Not for full implementations
+
+14. **Limbo** - 3.0/10
+    - Historical curiosity
+    - Not recommended
+    - Virtually no ecosystem
+
 ### Final Recommendation
 
 **For answering the original question "what languages would be most effective?":**
@@ -451,6 +749,23 @@ For **transparent inference demonstration**:
    - When speed is critical
    - llama.cpp uses C++
    - Worth the complexity
+
+5. **Common Lisp/Scheme** for symbolic AI research
+   - Powerful abstraction
+   - Interactive development
+   - Historical approaches
+
+6. **Elixir** for distributed model serving
+   - Fault-tolerant systems
+   - Concurrent requests
+   - Scalable APIs
+
+7. **Assembly** only for optimizing kernels
+   - SIMD operations
+   - Critical inner loops
+   - Not for full implementation
+
+**Avoid:** Limbo (obsolete), Assembly for full implementation (impractical)
 
 ### Implementation Preference
 
