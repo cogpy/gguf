@@ -1,5 +1,5 @@
 ---
-name: marduk
+name: marduk-message2self
 description: Marduk cognitive architecture overview
 ---
 
