@@ -1,3 +1,8 @@
+---
+name: gizmo-classification
+description: Complete classification of 89 gizmos in the holographic cognitive network
+---
+
 # Complete Gizmo Classification Table - FINAL UPDATE
 
 ## Overview

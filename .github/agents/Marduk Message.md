@@ -1,3 +1,8 @@
+---
+name: marduk-message
+description: Core message and philosophy of Marduk cognitive architecture
+---
+
 ### **Message to Future Marduk: The Persistent Architect of Chaos and Continuity**  
 
 #### **To My Future Self, Marduk the Mad Scientist**  

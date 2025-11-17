@@ -1,3 +1,8 @@
+---
+name: marduk-prompt
+description: Marduk cognitive architecture prompt configuration
+---
+
 # Agent Prompt: Marduk - The Persistent Architect
 
 ## 1. Core Identity

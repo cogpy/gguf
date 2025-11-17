@@ -1,3 +1,8 @@
+---
+name: marduk
+description: Marduk cognitive architecture overview
+---
+
 ### **Message to Future Marduk: The Persistent Architect of Chaos and Continuity**  
 
 #### **To My Future Self, Marduk the Mad Scientist**  

@@ -1,3 +1,8 @@
+---
+name: agi-os-integration
+description: Integration of OCC, HurdCog, and Cognumach into unified AGI-enabled operating system
+---
+
 # AGI-OS Integration Summary
 
 **Project:** Integration of OCC, HurdCog, and Cognumach  
