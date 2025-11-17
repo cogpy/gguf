@@ -12,6 +12,8 @@ from . import (
     GGUFConverter,
     ConversationDataset,
     ConversationAnalyzer,
+    VocabularyAnalyzer,
+    load_conversations_from_json,
     __version__,
 )
 
@@ -220,6 +222,78 @@ def cmd_analyze_conversations(args) -> int:
         return 1
 
 
+def cmd_analyze_vocabulary(args) -> int:
+    """
+    Analyze vocabulary usage and layer activations in conversations.
+    
+    This command provides enhanced vocabulary analysis including:
+    - Complete vocabulary enumeration with word counts
+    - Coverage analysis (expressed vs. total available vocabulary)
+    - Layer activation inference based on vocabulary patterns
+    - Echo state reservoir computing framework interactions
+    """
+    try:
+        # Load conversations
+        print(f"Loading conversations from {args.file}...")
+        conversations = load_conversations_from_json(args.file)
+        print(f"Loaded {len(conversations)} conversations")
+        
+        # Create vocabulary analyzer with model configuration
+        analyzer = VocabularyAnalyzer(
+            total_vocab_size=args.vocab_size,
+            model_layers=args.layers,
+            embedding_dim=args.embedding_dim,
+            architecture=args.architecture
+        )
+        
+        # Generate comprehensive report
+        print("Analyzing vocabulary and layer activations...")
+        report = analyzer.generate_comprehensive_report(conversations)
+        
+        # Display summary
+        if not args.quiet:
+            print("\n" + report['summary'])
+            
+            # Show key insights
+            vocab_analysis = report['vocabulary_analysis']
+            coverage = vocab_analysis.get('vocabulary_coverage', {})
+            
+            if coverage:
+                print("\nKey Metrics:")
+                print(f"  Vocabulary coverage: {coverage['coverage_percentage']:.2f}%")
+                print(f"  Expressed vocabulary: {coverage['expressed_vocab_size']:,} words")
+                print(f"  Total available: {coverage['total_vocab_size']:,} words")
+            
+            # Show feedback strength
+            echo_analysis = report['echo_reservoir_analysis']
+            feedback = echo_analysis.get('feedback_loops', {})
+            if feedback:
+                print(f"\nEcho State Analysis:")
+                print(f"  Feedback strength: {feedback.get('feedback_strength', 'unknown')}")
+                print(f"  Echo ratio: {feedback.get('echo_ratio', 0):.1%}")
+            
+            # Show recommendations
+            recommendations = echo_analysis.get('recommendations', [])
+            if recommendations and not args.quiet:
+                print("\nRecommendations:")
+                for i, rec in enumerate(recommendations[:3], 1):
+                    print(f"  {i}. {rec}")
+        
+        # Save detailed report if output specified
+        if args.output:
+            with open(args.output, 'w') as f:
+                json.dump(report, f, indent=2)
+            print(f"\n✓ Saved detailed analysis to {args.output}")
+        
+        return 0
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
+
 def main():
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(
@@ -317,6 +391,45 @@ def main():
         help="Suppress summary output (only save to file)"
     )
     analyze_parser.set_defaults(func=cmd_analyze_conversations)
+    
+    # Analyze vocabulary command
+    vocab_parser = subparsers.add_parser(
+        "analyze-vocabulary",
+        help="Analyze vocabulary usage and layer activations in conversations"
+    )
+    vocab_parser.add_argument(
+        "file",
+        help="Path to conversation dataset JSON/JSONL file"
+    )
+    vocab_parser.add_argument(
+        "-o", "--output",
+        help="Output JSON file for detailed analysis (default: display summary only)"
+    )
+    vocab_parser.add_argument(
+        "--vocab-size",
+        type=int,
+        help="Total model vocabulary size (e.g., 50257 for GPT-2)"
+    )
+    vocab_parser.add_argument(
+        "--layers",
+        type=int,
+        help="Number of transformer layers (e.g., 12 for GPT-2 small)"
+    )
+    vocab_parser.add_argument(
+        "--embedding-dim",
+        type=int,
+        help="Embedding dimension (e.g., 768 for GPT-2 small)"
+    )
+    vocab_parser.add_argument(
+        "--architecture",
+        help="Model architecture (e.g., 'transformer', 'gpt2', 'llama')"
+    )
+    vocab_parser.add_argument(
+        "-q", "--quiet",
+        action="store_true",
+        help="Suppress summary output (only save to file)"
+    )
+    vocab_parser.set_defaults(func=cmd_analyze_vocabulary)
 
     args = parser.parse_args()
 

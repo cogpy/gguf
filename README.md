@@ -9,7 +9,8 @@ A comprehensive tool for inspecting, modifying, and customizing GGUF (GPT-Genera
 - 📊 **Export** metadata to JSON for analysis
 - 🔑 **List** all metadata keys in a file
 - 🔄 **Convert** GGUF to multiple representation formats
-- 💬 **Conversation Analysis** - Analyze what can be learned from query-response datasets (NEW!)
+- 💬 **Conversation Analysis** - Analyze what can be learned from query-response datasets
+- 📖 **Vocabulary Analysis** - Analyze vocabulary usage and layer activations (NEW!)
 - 🛠️ **CLI** Easy-to-use command-line interface
 - 📚 **Python API** for programmatic access
 - 🧠 **Pure Python Inference** - Multiple implementations showing how transformers work
@@ -140,6 +141,32 @@ This command helps answer fundamental questions:
 - How does sequential ordering enhance our understanding?
 - What additional insights come from character prompts and parameters?
 - What are the theoretical and practical limits of inference?
+
+#### Analyze vocabulary usage and layer activations (NEW!)
+
+```bash
+# Analyze vocabulary coverage and layer activations
+gguf-workbench analyze-vocabulary conversations.json \
+  --vocab-size 50257 \
+  --layers 12 \
+  --embedding-dim 768 \
+  --architecture gpt2
+
+# Save detailed analysis to JSON
+gguf-workbench analyze-vocabulary conversations.json \
+  --vocab-size 50257 \
+  --layers 12 \
+  -o vocab_analysis.json
+```
+
+This command provides deep insights into:
+- **Vocabulary enumeration**: Complete word counts from conversations with model metadata
+- **Coverage analysis**: How expressed vocabulary relates to total available vocabulary
+- **Layer activation inference**: Which transformer layers are likely active based on patterns
+- **Echo state reservoir dynamics**: How reservoir computing interacts with transformers
+- **Dynamic persona variables**: What persona dimensions are reflected in vocabulary
+
+See [VOCABULARY_ANALYSIS_GUIDE.md](VOCABULARY_ANALYSIS_GUIDE.md) for complete documentation.
 
 ### Python API Usage
 
@@ -282,6 +309,68 @@ for limit in result.inference_limits['theoretical_limits']:
 - Evaluating conversation datasets for research
 - Planning interpretability studies
 - Educational tool for understanding model internals
+
+#### Analyze Vocabulary Usage and Layer Activations (NEW!)
+
+```python
+from gguf_workbench import VocabularyAnalyzer, load_conversations_from_json
+
+# Load conversations (supports JSON, JSONL, messages format)
+conversations = load_conversations_from_json('conversations.json')
+
+# Create analyzer with model configuration
+analyzer = VocabularyAnalyzer(
+    total_vocab_size=50257,  # Total model vocabulary size
+    model_layers=12,          # Number of transformer layers
+    embedding_dim=768,        # Embedding dimension
+    architecture="gpt2"       # Model architecture
+)
+
+# Generate comprehensive report
+report = analyzer.generate_comprehensive_report(conversations)
+
+# Access vocabulary analysis
+vocab = report['vocabulary_analysis']
+print(f"Unique words: {vocab['total_unique_words']}")
+print(f"Coverage: {vocab['vocabulary_coverage']['coverage_percentage']:.2f}%")
+
+# Access layer activation insights
+layers = report['layer_activation_analysis']
+for estimate in layers['layer_activation_estimates']:
+    print(f"Layers {estimate['layer_range']}: {estimate['activation_level']}")
+
+# Access echo reservoir analysis
+echo = report['echo_reservoir_analysis']
+feedback = echo['feedback_loops']
+print(f"Feedback strength: {feedback['feedback_strength']}")
+print(f"Echo ratio: {feedback['echo_ratio']:.1%}")
+
+# Get recommendations
+for rec in echo['recommendations']:
+    print(f"• {rec}")
+
+# Save detailed report
+import json
+with open('vocab_report.json', 'w') as f:
+    json.dump(report, f, indent=2)
+```
+
+**Key Insights Provided**:
+- Complete vocabulary enumeration with word counts
+- Vocabulary coverage metrics (expressed vs. total available)
+- Layer activation inference based on vocabulary patterns
+- Echo state reservoir computing dynamics
+- Dynamic persona variable detection
+- Temporal vocabulary evolution patterns
+
+**Use Cases**:
+- Understanding model vocabulary utilization
+- Targeting interpretability at active layers
+- Analyzing reservoir-transformer interactions
+- Detecting persona dimensions in conversations
+- Evaluating dataset vocabulary diversity
+
+See [VOCABULARY_ANALYSIS_GUIDE.md](VOCABULARY_ANALYSIS_GUIDE.md) for complete documentation and examples.
 
 ## GGUF Format Overview
 
