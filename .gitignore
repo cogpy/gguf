@@ -51,3 +51,7 @@ htmlcov/
 
 # GGUF test files
 *.gguf
+
+# Example outputs
+analysis_output/
+representations/
