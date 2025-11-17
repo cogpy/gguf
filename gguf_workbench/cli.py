@@ -6,7 +6,14 @@ import argparse
 import json
 import sys
 
-from . import GGUFReader, GGUFWriter, GGUFConverter, __version__
+from . import (
+    GGUFReader,
+    GGUFWriter,
+    GGUFConverter,
+    ConversationDataset,
+    ConversationAnalyzer,
+    __version__,
+)
 
 
 def cmd_inspect(args) -> int:
@@ -180,6 +187,39 @@ def cmd_convert(args) -> int:
         return 1
 
 
+def cmd_analyze_conversations(args) -> int:
+    """Analyze conversation datasets to understand what can be learned about model internals."""
+    try:
+        # Load conversation dataset
+        dataset = ConversationDataset.from_json_file(args.file)
+        
+        # Create analyzer with optional model info
+        analyzer = ConversationAnalyzer(
+            model_vocab_size=args.vocab_size,
+            embedding_dim=args.embedding_dim,
+        )
+        
+        # Perform analysis
+        print("Analyzing conversation dataset...")
+        result = analyzer.analyze(dataset)
+        
+        # Display summary
+        if not args.quiet:
+            print(result.summary())
+        
+        # Save detailed results if output specified
+        if args.output:
+            result.to_json_file(args.output)
+            print(f"\n✓ Saved detailed analysis to {args.output}")
+        
+        return 0
+    except Exception as e:
+        print(f"Error: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
+
+
 def main():
     """Main entry point for the CLI."""
     parser = argparse.ArgumentParser(
@@ -250,6 +290,33 @@ def main():
         help="Include weight values (creates large files for big models)"
     )
     convert_parser.set_defaults(func=cmd_convert)
+    
+    # Analyze conversations command
+    analyze_parser = subparsers.add_parser(
+        "analyze-conversations",
+        help="Analyze conversation datasets to understand learning limits"
+    )
+    analyze_parser.add_argument("file", help="Path to conversation dataset JSON file")
+    analyze_parser.add_argument(
+        "-o", "--output",
+        help="Output JSON file for detailed analysis (default: display summary only)"
+    )
+    analyze_parser.add_argument(
+        "--vocab-size",
+        type=int,
+        help="Model vocabulary size (if known)"
+    )
+    analyze_parser.add_argument(
+        "--embedding-dim",
+        type=int,
+        help="Model embedding dimension (if known)"
+    )
+    analyze_parser.add_argument(
+        "-q", "--quiet",
+        action="store_true",
+        help="Suppress summary output (only save to file)"
+    )
+    analyze_parser.set_defaults(func=cmd_analyze_conversations)
 
     args = parser.parse_args()
 

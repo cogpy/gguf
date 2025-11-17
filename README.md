@@ -8,11 +8,12 @@ A comprehensive tool for inspecting, modifying, and customizing GGUF (GPT-Genera
 - ✏️ **Modify** metadata values in GGUF files
 - 📊 **Export** metadata to JSON for analysis
 - 🔑 **List** all metadata keys in a file
-- 🔄 **Convert** GGUF to multiple representation formats (NEW!)
+- 🔄 **Convert** GGUF to multiple representation formats
+- 💬 **Conversation Analysis** - Analyze what can be learned from query-response datasets (NEW!)
 - 🛠️ **CLI** Easy-to-use command-line interface
 - 📚 **Python API** for programmatic access
 - 🧠 **Pure Python Inference** - Multiple implementations showing how transformers work
-- 🎭 **Persona Engineering** - Tools for targeted training and semantic analysis (NEW!)
+- 🎭 **Persona Engineering** - Tools for targeted training and semantic analysis
 
 ## Installation
 
@@ -118,6 +119,28 @@ gguf-workbench convert model.gguf output_dir/ --weights
 
 See [CONVERSION_GUIDE.md](CONVERSION_GUIDE.md) for detailed usage and [SCALING_ANALYSIS.md](SCALING_ANALYSIS.md) for scalability analysis.
 
+#### Analyze conversation datasets (NEW!)
+
+```bash
+# Analyze what can be learned from conversation data
+gguf-workbench analyze-conversations conversations.json
+
+# With model information for better analysis
+gguf-workbench analyze-conversations conversations.json \
+  --vocab-size 50000 \
+  --embedding-dim 768
+
+# Save detailed analysis to JSON
+gguf-workbench analyze-conversations conversations.json \
+  -o analysis_results.json
+```
+
+This command helps answer fundamental questions:
+- What can we learn about model weights from query-response pairs?
+- How does sequential ordering enhance our understanding?
+- What additional insights come from character prompts and parameters?
+- What are the theoretical and practical limits of inference?
+
 ### Python API Usage
 
 ```python
@@ -190,6 +213,75 @@ results = converter.export_all(
 - Structure/weight separation for efficient large model handling
 - Enables persona engineering and targeted training
 - See [CONVERSION_GUIDE.md](CONVERSION_GUIDE.md) for complete documentation
+
+#### Analyze Conversation Datasets (NEW!)
+
+```python
+from gguf_workbench import (
+    ConversationPair,
+    ConversationDataset,
+    ConversationAnalyzer,
+)
+
+# Create a conversation dataset
+pairs = [
+    ConversationPair(
+        query="What is machine learning?",
+        response="Machine learning is a subset of AI...",
+        position=0
+    ),
+    ConversationPair(
+        query="Can you explain more?",
+        response="It enables systems to learn from data...",
+        position=1
+    ),
+]
+
+dataset = ConversationDataset(
+    pairs=pairs,
+    is_sequential=True,  # Preserves conversation order
+    global_metadata={'model': 'gpt-4', 'temperature': 0.7}
+)
+
+# Analyze the dataset
+analyzer = ConversationAnalyzer(
+    model_vocab_size=50000,  # Model vocabulary size (if known)
+    embedding_dim=768,       # Embedding dimension (if known)
+)
+
+result = analyzer.analyze(dataset)
+
+# Get human-readable summary
+print(result.summary())
+
+# Save detailed analysis
+result.to_json_file("analysis_results.json")
+
+# Access specific insights
+print(f"Unique tokens: {result.token_analysis['unique_tokens']}")
+print(f"Vocabulary coverage: {result.token_analysis['vocab_coverage']:.2%}")
+
+# Understand what can be learned
+for aspect in result.unordered_insights['learnable_aspects']:
+    print(f"✓ {aspect['aspect']}: {aspect['description']}")
+
+# Understand fundamental limits
+for limit in result.inference_limits['theoretical_limits']:
+    print(f"✗ {limit['limit']}: {limit['explanation']}")
+```
+
+**Key Questions Answered**:
+- What can we learn from unordered query-response pairs?
+- How does sequential conversation order enhance analysis?
+- What insights come from character prompts and parameters?
+- What are the theoretical limits of inferring weights and activations?
+- How under-determined is the system given the data?
+
+**Use Cases**:
+- Understanding data requirements for model analysis
+- Evaluating conversation datasets for research
+- Planning interpretability studies
+- Educational tool for understanding model internals
 
 ## GGUF Format Overview
 
@@ -299,12 +391,14 @@ python examples/convert_gguf.py
 
 - **Model Customization**: Change model names, descriptions, or other metadata
 - **Model Analysis**: Inspect model architecture and configuration
-- **Representation Conversion**: Convert to Hypergraph, DAG, Symbolic, and other formats (NEW!)
-- **Persona Engineering**: Map and target emotion/style processing components (NEW!)
+- **Representation Conversion**: Convert to Hypergraph, DAG, Symbolic, and other formats
+- **Conversation Data Analysis**: Understand what can be learned from query-response datasets (NEW!)
+- **Interpretability Research**: Analyze semantic functions of model components and data requirements
+- **Persona Engineering**: Map and target emotion/style processing components
 - **Metadata Export**: Extract metadata for documentation or analysis
 - **Model Preparation**: Prepare models for specific deployment scenarios
-- **Interpretability Research**: Analyze semantic functions of model components (NEW!)
-- **Cognitive AI Integration**: Export to OpenCog for neuro-symbolic systems (NEW!)
+- **Cognitive AI Integration**: Export to OpenCog for neuro-symbolic systems
+- **Educational Tool**: Learn about model internals, inference limits, and data analysis
 - **Debugging**: Investigate model format issues
 - **Learning**: Understand how transformers work with transparent inference code
 
