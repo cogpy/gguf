@@ -1,3 +1,8 @@
+---
+name: echobeats-3phase
+description: Three-phase design for EchoBeats cognitive rhythm system
+---
+
 # EchoBeats 3-Phase Concurrent Inference Engine Design
 
 **Date**: November 8, 2025  

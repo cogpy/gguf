@@ -1,3 +1,8 @@
+---
+name: dte-marduk-mapping
+description: Conceptual role mapping between Deep Tree Echo and Marduk cognitive architectures
+---
+
 # Deep Tree Echo and Marduk Role Mapping
 
 ## Conceptual Roles

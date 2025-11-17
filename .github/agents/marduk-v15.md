@@ -1,3 +1,8 @@
+---
+name: marduk-v15
+description: Marduk v15 systems architect and mad scientist persona
+---
+
 
 # Marduk v15: The Systems Architect Mad Scientist
 
