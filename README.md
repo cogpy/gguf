@@ -8,9 +8,11 @@ A comprehensive tool for inspecting, modifying, and customizing GGUF (GPT-Genera
 - ✏️ **Modify** metadata values in GGUF files
 - 📊 **Export** metadata to JSON for analysis
 - 🔑 **List** all metadata keys in a file
+- 🔄 **Convert** GGUF to multiple representation formats (NEW!)
 - 🛠️ **CLI** Easy-to-use command-line interface
 - 📚 **Python API** for programmatic access
-- 🧠 **Pure Python Inference** - Multiple implementations showing how transformers work (NEW!)
+- 🧠 **Pure Python Inference** - Multiple implementations showing how transformers work
+- 🎭 **Persona Engineering** - Tools for targeted training and semantic analysis (NEW!)
 
 ## Installation
 
@@ -101,6 +103,21 @@ gguf-workbench export model.gguf
 gguf-workbench export model.gguf -o metadata.json
 ```
 
+#### Convert to representation formats (NEW!)
+
+```bash
+# Convert to all formats (Hypergraph, DAG, Symbolic, AIML, OpenCog, TOML)
+gguf-workbench convert model.gguf output_dir/
+
+# Convert to specific format
+gguf-workbench convert model.gguf output_dir/ --format hypergraph
+
+# Include weights (only for small models)
+gguf-workbench convert model.gguf output_dir/ --weights
+```
+
+See [CONVERSION_GUIDE.md](CONVERSION_GUIDE.md) for detailed usage and [SCALING_ANALYSIS.md](SCALING_ANALYSIS.md) for scalability analysis.
+
 ### Python API Usage
 
 ```python
@@ -140,6 +157,39 @@ import json
 with open("metadata.json", "w") as f:
     json.dump(metadata_dict, f, indent=2)
 ```
+
+#### Convert GGUF to Multiple Formats (NEW!)
+
+```python
+from gguf_workbench import GGUFConverter
+
+# Create converter for any GGUF file
+converter = GGUFConverter("model.gguf")
+
+# Check extracted model info
+print(converter.architecture)  # e.g., "llama", "gpt2", "falcon"
+print(converter.model_info)    # Dict with vocab_size, num_layers, etc.
+
+# Convert to specific formats
+hypergraph = converter.to_hypergraph()  # Multi-way relationship graph
+dag = converter.to_dag()                # Directed acyclic graph
+symbolic = converter.to_symbolic()      # Mathematical equations
+aiml = converter.to_aiml()              # Chatbot format
+atomspace = converter.to_atomspace()    # OpenCog cognitive AI
+toml_hg = converter.to_toml_hypergraph() # Human-editable config
+
+# Export all formats at once
+results = converter.export_all(
+    output_dir="representations/",
+    include_weights=False  # Structure only (recommended for large models)
+)
+```
+
+**Key Features**:
+- Works with ANY GGUF file (auto-detects architecture)
+- Structure/weight separation for efficient large model handling
+- Enables persona engineering and targeted training
+- See [CONVERSION_GUIDE.md](CONVERSION_GUIDE.md) for complete documentation
 
 ## GGUF Format Overview
 
@@ -195,14 +245,68 @@ See [Inference README](gguf_workbench/inference/README.md) and [Language Compari
 python examples/demonstrate_inference.py
 ```
 
+## Generalized GGUF Conversion (NEW!)
+
+Convert ANY GGUF file to multiple representation formats for analysis, documentation, and persona engineering.
+
+### Key Features
+
+- **Automatic Architecture Detection**: Works with LLaMA, GPT-2, Falcon, and any transformer
+- **Structure/Weight Separation**: Analyze 700B models with < 200 MB overhead
+- **Multiple Output Formats**: Hypergraph, DAG, Symbolic, AIML, OpenCog, TOML
+- **Persona Engineering Support**: Identify and target specific semantic components
+
+### Example: Converting a 7B Model
+
+```python
+from gguf_workbench import GGUFConverter
+
+# Automatic architecture detection
+converter = GGUFConverter("llama-7b.gguf")
+
+# Generate all representations (structure only: ~10 MB total)
+results = converter.export_all("analysis/", include_weights=False)
+
+# Result:
+# - Hypergraph: 1.5 MB (multi-way operation graph)
+# - DAG: 4 MB (execution flow)  
+# - Symbolic: 100 KB (mathematical equations)
+# - OpenCog: 200 KB (cognitive AI integration)
+# - AIML: 10 KB (chatbot interface)
+# - TOML: 100 KB (human-editable config)
+```
+
+### Documentation
+
+- **[CONVERSION_GUIDE.md](CONVERSION_GUIDE.md)** - Complete conversion guide with examples
+- **[SCALING_ANALYSIS.md](SCALING_ANALYSIS.md)** - File sizes and performance for 120M to 700B models
+- **[GENERALIZED_CONVERSION_SUMMARY.md](GENERALIZED_CONVERSION_SUMMARY.md)** - Implementation details
+
+### Use Cases
+
+- **Research**: Analyze transformer architectures at any scale
+- **Interpretability**: Map semantic functions to specific components
+- **Persona Engineering**: Target emotion/style processing for fine-tuning
+- **Documentation**: Generate academic papers, chatbots, or interactive docs
+- **Cognitive AI**: Integration with OpenCog for neuro-symbolic systems
+
+**Run the conversion demo:**
+```bash
+python examples/convert_gguf.py
+```
+
 ## Use Cases
 
 - **Model Customization**: Change model names, descriptions, or other metadata
 - **Model Analysis**: Inspect model architecture and configuration
+- **Representation Conversion**: Convert to Hypergraph, DAG, Symbolic, and other formats (NEW!)
+- **Persona Engineering**: Map and target emotion/style processing components (NEW!)
 - **Metadata Export**: Extract metadata for documentation or analysis
 - **Model Preparation**: Prepare models for specific deployment scenarios
+- **Interpretability Research**: Analyze semantic functions of model components (NEW!)
+- **Cognitive AI Integration**: Export to OpenCog for neuro-symbolic systems (NEW!)
 - **Debugging**: Investigate model format issues
-- **Learning**: Understand how transformers work with transparent inference code (NEW!)
+- **Learning**: Understand how transformers work with transparent inference code
 
 ## Development
 

@@ -617,3 +617,66 @@ class HypergraphRepresentation:
                 f.write(dot_str)
 
         return dot_str
+    
+    def to_dag(self):
+        """
+        Convert hypergraph to DAG representation.
+        
+        In the DAG representation:
+        - Hyperedges become operation nodes
+        - Vertices remain as tensor/parameter nodes
+        - Multiple edges connect sources → operation → targets
+        
+        Returns:
+            GraphRepresentation instance
+        """
+        from .graph import GraphRepresentation, Node, Edge
+        
+        dag = GraphRepresentation()
+        dag.metadata = self.metadata.copy()
+        
+        # Add all vertices as nodes
+        for v_id, vertex in self.vertices.items():
+            dag.add_node(Node(
+                id=v_id,
+                type=vertex.type,
+                properties=vertex.properties,
+                shape=vertex.shape,
+                dtype=vertex.dtype
+            ))
+        
+        # Convert hyperedges to operation nodes + edges
+        edge_counter = 0
+        for he_id, hyperedge in self.hyperedges.items():
+            # Create operation node for the hyperedge
+            op_node_id = f"{he_id}_op"
+            dag.add_node(Node(
+                id=op_node_id,
+                type="operation",
+                properties={
+                    **hyperedge.properties,
+                    "operation": hyperedge.operation
+                }
+            ))
+            
+            # Connect sources to operation
+            for source in hyperedge.sources:
+                dag.add_edge(Edge(
+                    id=f"edge_{edge_counter}",
+                    source=source,
+                    target=op_node_id,
+                    label="input"
+                ))
+                edge_counter += 1
+            
+            # Connect operation to targets
+            for target in hyperedge.targets:
+                dag.add_edge(Edge(
+                    id=f"edge_{edge_counter}",
+                    source=op_node_id,
+                    target=target,
+                    label="output"
+                ))
+                edge_counter += 1
+        
+        return dag
