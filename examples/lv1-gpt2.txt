@@ -1,0 +1,8 @@
+
+gpt
+└───gpt2
+    └───transformer
+        ├───ln_f
+        ├───h
+        ├───wpe
+        └───wte

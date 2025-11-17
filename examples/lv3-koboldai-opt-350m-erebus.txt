@@ -1,0 +1,155 @@
+
+M
+└───KoboldAI
+    └───OPT-350M-Erebus
+        └───model
+            └───decoder
+                ├───embed_positions
+                ├───embed_tokens
+                ├───layers
+                │   ├───0
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───1
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───2
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───3
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───4
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───5
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───6
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───7
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───8
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───9
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───10
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───11
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───12
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───13
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───14
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───15
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───16
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───17
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───18
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───19
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───20
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───21
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   ├───22
+                │   │   ├───self_attn
+                │   │   ├───self_attn_layer_norm
+                │   │   ├───fc1
+                │   │   ├───fc2
+                │   │   └───final_layer_norm
+                │   └───23
+                │       ├───self_attn
+                │       ├───self_attn_layer_norm
+                │       ├───fc1
+                │       ├───fc2
+                │       └───final_layer_norm
+                ├───project_in
+                └───project_out

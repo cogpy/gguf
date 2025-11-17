@@ -1,0 +1,837 @@
+
+weight+bias
+│
+│
+└───KoboldAI
+    └───OPT-350M-Erebus
+        └───model
+            └───decoder
+                ├───embed_positions
+                │       weight.npy
+                │
+                ├───embed_tokens
+                │       weight.npy
+                │
+                ├───layers
+                │   ├───0
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───1
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───2
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───3
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───4
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───5
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───6
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───7
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───8
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───9
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───10
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───11
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───12
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───13
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───14
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───15
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───16
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───17
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───18
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───19
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───20
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───21
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   ├───22
+                │   │   ├───self_attn
+                │   │   │   ├───k_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───v_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   ├───q_proj
+                │   │   │   │       weight.npy
+                │   │   │   │       bias.npy
+                │   │   │   │
+                │   │   │   └───out_proj
+                │   │   │           weight.npy
+                │   │   │           bias.npy
+                │   │   │
+                │   │   ├───self_attn_layer_norm
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc1
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   ├───fc2
+                │   │   │       weight.npy
+                │   │   │       bias.npy
+                │   │   │
+                │   │   └───final_layer_norm
+                │   │           weight.npy
+                │   │           bias.npy
+                │   │
+                │   └───23
+                │       ├───self_attn
+                │       │   ├───k_proj
+                │       │   │       weight.npy
+                │       │   │       bias.npy
+                │       │   │
+                │       │   ├───v_proj
+                │       │   │       weight.npy
+                │       │   │       bias.npy
+                │       │   │
+                │       │   ├───q_proj
+                │       │   │       weight.npy
+                │       │   │       bias.npy
+                │       │   │
+                │       │   └───out_proj
+                │       │           weight.npy
+                │       │           bias.npy
+                │       │
+                │       ├───self_attn_layer_norm
+                │       │       weight.npy
+                │       │       bias.npy
+                │       │
+                │       ├───fc1
+                │       │       weight.npy
+                │       │       bias.npy
+                │       │
+                │       ├───fc2
+                │       │       weight.npy
+                │       │       bias.npy
+                │       │
+                │       └───final_layer_norm
+                │               weight.npy
+                │               bias.npy
+                │
+                ├───project_in
+                │       weight.npy
+                │
+                └───project_out
+                        weight.npy
+     

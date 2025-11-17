@@ -1,0 +1,11 @@
+
+M
+└───KoboldAI
+    └───OPT-350M-Erebus
+        └───model
+            └───decoder
+                ├───embed_positions
+                ├───embed_tokens
+                ├───layers
+                ├───project_in
+                └───project_out
