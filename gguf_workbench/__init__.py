@@ -14,6 +14,10 @@ from .analysis import (
     ConversationAnalyzer,
     AnalysisResult,
 )
+from .vocabulary_analysis import (
+    VocabularyAnalyzer,
+    load_conversations_from_json,
+)
 
 __all__ = [
     "GGUFReader",
@@ -24,6 +28,8 @@ __all__ = [
     "ConversationDataset",
     "ConversationAnalyzer",
     "AnalysisResult",
+    "VocabularyAnalyzer",
+    "load_conversations_from_json",
     "__version__",
 ]
 
